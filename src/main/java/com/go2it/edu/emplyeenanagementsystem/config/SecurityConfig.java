@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//Login part
 				.formLogin()
 				.loginPage("/index.html")
-				//POST from login form will be done to this APU
+				//POST from login form will be done to this API
 				.loginProcessingUrl("/perform_login")
 				.defaultSuccessUrl("/homepage.html", true)
 				.failureUrl("/index.html?error=true");

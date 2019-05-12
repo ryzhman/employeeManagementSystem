@@ -48,18 +48,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.authorizeRequests()
 				//conventional REST API
-				.antMatchers("/api/welcome")
-				.permitAll()
 		//				even anonymous user is authenthicated
 		//				.authenticated()
 		//				 .hasAnyRole()
-				.antMatchers(HttpMethod.POST, "/api/customizedWelcome")
-				.permitAll()
-				.antMatchers("/api/user/**")
+				.antMatchers("/api/employees/**")
 				.hasAnyRole("ADMIN", "USER")
-				.antMatchers("/api/resource/**")
-				.hasRole("ADMIN")
 				//MVC part - React pages
+				.antMatchers("/employees.html")
+				.hasAnyRole("ADMIN", "USER")
 				.antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
 				.permitAll()
 				//All the rest of requests

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import Form from './component/Form'
+import Form from './component/login/Form'
 
 const inputs = [{
     name: "username",

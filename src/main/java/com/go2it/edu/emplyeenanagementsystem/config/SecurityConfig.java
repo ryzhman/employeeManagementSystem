@@ -45,31 +45,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.httpBasic()
 				.and()
 				.authorizeRequests()
+				//conventional REST API
 				.antMatchers("/api/welcome")
 				.permitAll()
-				.antMatchers("/login")
-				.permitAll()
-				//				even anonymous user is authenthicated
-				//				.authenticated()
-				//				 .hasAnyRole()
+		//				even anonymous user is authenthicated
+		//				.authenticated()
+		//				 .hasAnyRole()
 				.antMatchers(HttpMethod.POST, "/api/customizedWelcome")
 				.permitAll()
 				.antMatchers("/api/user/**")
 				.hasAnyRole("ADMIN", "USER")
 				.antMatchers("/api/resource/**")
 				.hasRole("ADMIN")
+				//MVC part - React pages
+				.antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
+				.permitAll()
+				//All the rest of requests
 				.anyRequest()
 				.authenticated()
 				.and()
+				//Login part
 				.formLogin()
-				.loginPage("/login.html").passwordParameter("password").usernameParameter("username")
-				//					.defaultSuccessUrl("/api/welcome")
-				//					.failureUrl("/login?error=true")
-				.permitAll(true)
-				.and();
-		//					.logout()
-		//					.logoutSuccessUrl("/login?logout=true")
-		//					.invalidateHttpSession(true)
-		//					.permitAll();
+				.loginPage("/index.html")
+				//POST from login form will be done to this APU
+				.loginProcessingUrl("/perform_login")
+				.defaultSuccessUrl("/homepage.html", true)
+				.failureUrl("/index.html?error=true");
+		//Logout part
+		//							.logout()
+		//							.logoutSuccessUrl("/login?logout=true")
+		//							.invalidateHttpSession(true)
+		//							.permitAll();
 	}
 }

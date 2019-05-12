@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic()
+		http
+				.csrf().disable()
+				.httpBasic()
 				.and()
 				.authorizeRequests()
 				//conventional REST API
@@ -67,14 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//Login part
 				.formLogin()
 				.loginPage("/index.html")
-				//POST from login form will be done to this API
+				//form data will be POST to this API
 				.loginProcessingUrl("/perform_login")
-				.defaultSuccessUrl("/homepage.html", true)
-				.failureUrl("/index.html?error=true");
-		//Logout part
-		//							.logout()
-		//							.logoutSuccessUrl("/login?logout=true")
-		//							.invalidateHttpSession(true)
-		//							.permitAll();
+				.defaultSuccessUrl("/homepage.html",true)
+				.failureUrl("/index.html?error=true")
+				.and()
+				.logout()
+				.logoutUrl("/perform_logout")
+				.deleteCookies("JSESSIONID");
 	}
 }

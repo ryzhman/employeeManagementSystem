@@ -1,39 +1,61 @@
 package com.go2it.edu.emplyeenanagementsystem.controller;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.go2it.edu.emplyeenanagementsystem.service.IEmployeeService;
 
 /**
  * @author Alex Ryzhkov
  */
-//this annotation will work only for MVC templates (no hardcoded HTML in response)
-//@Controller
-//this will work only for REST calls (no reference to templates)
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/employees")
 public class EmployeeController {
 
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String getHelloWorldMessage() {
-		//Use template instead of hard-coded HTML
-		//				return "helloWorld.html";
+	@Autowired
+	private IEmployeeService employeeService;
 
-		return "<div style=\"text-align:center;\">" + "<h1>Hello world</h1>"
-				+ "<p> This is my first web-page </p>"
-				+ "<img src=https://cdn-images-1.medium.com/fit/t/1600/672/0*n-2bW82Z6m6U2bij.jpeg></img>"
-				+ "</div>";
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<JSONObject> getEmployeeById(@PathVariable(name = "id") String employeeId) {
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap.put("status", "succesful");
+		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "login";
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> getEmployees() {
+		return ResponseEntity.ok().body(employeeService.getUsers());
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public String getHelloWorldMessageForUser(@RequestParam String name) {
-		return "<div style=\"text-align:center;\">" + "<h1>Welcome, " + name + "</h1>"
-				+ "<p> This is my first web-page </p>" + "</div>";
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public ResponseEntity<JSONObject> createNewEmployee(@RequestBody String body) {
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap.put("status", "succesful");
+		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<JSONObject> updateEmployee(@PathVariable(name = "id") String employeeId) {
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap.put("status", "succesful");
+		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/delete/{id}")
+	public ResponseEntity<JSONObject> deleteEmployee(@PathVariable(name = "id") String employeeId) {
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap.put("status", "succesful");
+		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
 	}
 }

@@ -89,6 +89,6 @@ Form.propTypes = {
     method: PropTypes.string,
     inputs: PropTypes.array,
     error: PropTypes.string
-}
+};
 
-export default Form
+export default Form;

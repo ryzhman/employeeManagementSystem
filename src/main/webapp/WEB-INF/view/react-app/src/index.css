@@ -59,3 +59,16 @@ input {
   border-radius: .25rem;
   margin: 0;
 }
+
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+.active{
+  color:red;
+}
+
+.container, .container-fluid {
+  margin-top: 20px;
+}

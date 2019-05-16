@@ -32,13 +32,13 @@ public class EmployeeController {
 		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> getEmployees() {
 		return ResponseEntity.ok().body(employeeService.getUsers());
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<JSONObject> createNewEmployee(@RequestBody String body) {
 		HashMap<String, String> hashMap = new HashMap<>();
 		hashMap.put("status", "succesful");
@@ -52,7 +52,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(new JSONObject(hashMap), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/delete/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<JSONObject> deleteEmployee(@PathVariable(name = "id") String employeeId) {
 		HashMap<String, String> hashMap = new HashMap<>();
 		hashMap.put("status", "succesful");

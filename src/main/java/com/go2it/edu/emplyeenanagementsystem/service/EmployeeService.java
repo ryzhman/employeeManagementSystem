@@ -52,20 +52,19 @@ public class EmployeeService implements IEmployeeService {
 			StringBuilder result = new StringBuilder();
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet("http://dummy.restapiexample.com/api/v1/employees");
-			HttpResponse response = null;
-			response = client.execute(request);
+			HttpResponse response = client.execute(request);
 
 			// Get the response
 			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-			String line = "";
+			String line;
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
 			}
 			return new JSONObject().put("employees", result.toString()).toString();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return new JSONObject().put("employees", "No records found").toString();
 		}
-		return null;
 	}
 
 	@Override

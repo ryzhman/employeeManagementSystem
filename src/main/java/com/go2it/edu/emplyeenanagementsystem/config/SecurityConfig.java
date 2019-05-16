@@ -42,20 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.csrf().disable()
+		http.csrf()
+				.disable()
 				.httpBasic()
 				.and()
 				.authorizeRequests()
 				//conventional REST API
-		//				even anonymous user is authenthicated
-		//				.authenticated()
-		//				 .hasAnyRole()
+				//				even anonymous user is authenthicated
+				//				.authenticated()
+				//				 .hasAnyRole()
 				.antMatchers("/api/employees/**")
 				.hasAnyRole("ADMIN", "USER")
 				//MVC part - React pages
-				.antMatchers("/employees.html")
-				.hasAnyRole("ADMIN", "USER")
 				.antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
 				.permitAll()
 				//All the rest of requests
@@ -64,14 +62,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				//Login part
 				.formLogin()
-				.loginPage("/index.html")
+				.loginPage("/login.html")
+				.permitAll()
 				//form data will be POST to this API
 				.loginProcessingUrl("/perform_login")
-				.defaultSuccessUrl("/homepage.html",true)
-				.failureUrl("/index.html?error=true")
+				.failureForwardUrl("/login.html?error=true")
+//				.failureUrl("/login.html?error=true")
+				.defaultSuccessUrl("/index.html", true)
 				.and()
 				.logout()
-				.logoutUrl("/perform_logout")
+//				.logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID");
 	}
 }

@@ -20,6 +20,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
+		registry.addResourceHandler("/login.html*").addResourceLocations("/WEB-INF/view/login.html");
 		registry.addResourceHandler("/static/**")
 				.addResourceLocations("/WEB-INF/view/react-app/build/static/");
 		registry.addResourceHandler("/*.js").addResourceLocations("/WEB-INF/view/react-app/build/");

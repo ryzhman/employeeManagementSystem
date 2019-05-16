@@ -5,7 +5,7 @@ import EmployeeManagementApp from './router/EmployeeManagementApp';
 import {BrowserRouter as Router, Link, NavLink, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
 import NotFound from "./component/servicePages/NotFound";
-import Login from "./component/security/Login";
+import Logout from "./component/security/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './component/servicePages/Navbar';
 
@@ -26,14 +26,17 @@ const router = (
                 <li>
                     <Link to="/contact">Contact</Link>
                 </li>
+                <li>
+                    <Link to="/logout">Logout</Link>
+                </li>
             </ul>
             <Switch>
                 <Route exact path="/" component={EmployeeManagementApp}/>
-                <Route exact path="/login" component={Login}/>
                 <Route exact path="/employees" component={EmployeeList}/>
                 {/*id is this.props in the component*/}
                 <Route exact path="/employees/:id" component={EmployeeList}/>
                 <Route path="/contact" component={EmployeeList}/>
+                <Route path="/logout" component={Logout}/>
                 {/*// If the routing path wasn't found, rollback to default one*/}
                 <Route component={NotFound}/>
             </Switch>

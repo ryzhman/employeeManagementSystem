@@ -67,11 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				//form data will be POST to this API
 				.loginProcessingUrl("/perform_login")
 				.failureForwardUrl("/login.html?error=true")
-//				.failureUrl("/login.html?error=true")
 				.defaultSuccessUrl("/index.html", true)
 				.and()
 				.logout()
-//				.logoutSuccessUrl("/")
+				.logoutUrl("/perform_logout")
+				.logoutSuccessUrl("/index.html")
 				.deleteCookies("JSESSIONID");
 	}
 }

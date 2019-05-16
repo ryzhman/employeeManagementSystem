@@ -9,9 +9,10 @@ import {
     NavbarBrand,
     NavbarToggler,
     NavItem,
-    NavLink,
+    // NavLink,
     UncontrolledDropdown
 } from 'reactstrap';
+import {NavLink} from 'react-router-dom';
 
 export default class AppNavbar extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ export default class AppNavbar extends Component {
 
     render() {
         return (
-            <Navbar color="dark" expand="md" sticky={'top'}
+            <Navbar color="light" light  expand="md" sticky={'top'}
                     className="shadow-sm py-0 border-dark border-bottom">
                 <div>
                     <NavbarBrand to="/"><img
@@ -37,18 +38,18 @@ export default class AppNavbar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/employees">View all employees</NavLink>
+                                <NavLink to="/employees" activeClassName="active">View all employees</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/contact">Contact us</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    href="https://www.facebook.com/Go2IT.ca">@Facebook</NavLink>
+                                <NavLink to="/contact"  activeClassName="active">Contact us</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink
-                                    href="https://github.com/ryzhman/employeeManagementSystem">GitHub</NavLink>
+                                    href="https://www.facebook.com/Go2IT.ca" activeClassName="active">@Facebook</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    href="https://github.com/ryzhman/employeeManagementSystem" activeClassName="active">GitHub</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -56,7 +57,7 @@ export default class AppNavbar extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                        <NavLink href="/info">Info</NavLink>
+                                        <NavLink to="/info">Info</NavLink>
                                     </DropdownItem>
                                     <DropdownItem divider/>
                                     <DropdownItem>

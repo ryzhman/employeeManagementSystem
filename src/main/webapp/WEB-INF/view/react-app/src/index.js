@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import EmployeeManagementApp from './router/EmployeeManagementApp';
+import EmployeeManagementApp from './component/EmployeeManagementApp';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
 import Logout from "./component/security/Logout";

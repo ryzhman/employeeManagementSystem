@@ -24,8 +24,7 @@ class EmployeeList extends Component {
         this.setState({isLoading: true});
 
         employeeDataService.fetchAllEmployees()
-            .then(response => response.json())
-            .then(data => this.setState({employees: data, isLoading: false}));
+            .then(employees => this.setState({employees: JSON.parse(employees), isLoading: false}));
     }
 
     render() {

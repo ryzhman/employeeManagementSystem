@@ -5,14 +5,13 @@ body {
 
 #root {
   position: absolute;
-  top: 50%;
+  top:55%;
   right: 0;
   left: 0;
   margin-right: auto;
   margin-left: auto;
   transform: translateY(-50%);
   overflow: hidden;
-  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -71,4 +70,14 @@ body {
 
 .container, .container-fluid {
   margin-top: 20px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand>img {
+  padding: 7px 14px;
+  height: 60px;
+  width: 180px;
 }

@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import EmployeeManagementApp from './router/EmployeeManagementApp';
-import {BrowserRouter as Router, Link, NavLink, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
-import NotFound from "./component/servicePages/NotFound";
 import Logout from "./component/security/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './component/servicePages/Navbar';
@@ -14,22 +13,11 @@ const params = new URLSearchParams(window.location.search)
 
 const router = (
     <Router>
-        <Route path="/" component={Navbar}/>
         <div>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/employees">View all employees</Link>
-                </li>
-                <li>
-                    <Link to="/contact">Contact</Link>
-                </li>
-                <li>
-                    <Link to="/logout">Logout</Link>
-                </li>
-            </ul>
+            <Navbar/>
+        </div>
+
+        <div>
             <Switch>
                 <Route exact path="/" component={EmployeeManagementApp}/>
                 <Route exact path="/employees" component={EmployeeList}/>
@@ -37,8 +25,9 @@ const router = (
                 <Route exact path="/employees/:id" component={EmployeeList}/>
                 <Route path="/contact" component={EmployeeList}/>
                 <Route path="/logout" component={Logout}/>
+                <Route path="*" render={() => <Redirect to="/"/>}/>
                 {/*// If the routing path wasn't found, rollback to default one*/}
-                <Route component={NotFound}/>
+                {/*<Route component={NotFound}/>*/}
             </Switch>
         </div>
     </Router>

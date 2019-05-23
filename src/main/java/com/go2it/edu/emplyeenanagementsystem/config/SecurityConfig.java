@@ -89,21 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 					//All the rest of requests
 					.anyRequest()
-					.authenticated()
-				.and()
-				//Login part
-					.formLogin()
-					.loginPage("/login.html")
-					.permitAll()
-					//form data will be POST to this API
-					.loginProcessingUrl("/perform_login")
-					.failureForwardUrl("/login.html?error=true")
-					.defaultSuccessUrl("/index.html", true)
-				.and()
-					.logout()
-					.logoutUrl("/perform_logout")
-					.logoutSuccessUrl("/index.html")
-					.deleteCookies("JSESSIONID");
+					.authenticated();
 
 		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 

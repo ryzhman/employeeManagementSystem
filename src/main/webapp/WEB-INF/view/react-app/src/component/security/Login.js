@@ -2,12 +2,12 @@ import React from 'react';
 import Form from '../html/Form';
 
 const inputs = [{
-    name: "username",
-    placeholder: "username",
+    name: "userLogin",
+    placeholder: "Enter your email address",
     type: "text"
 }, {
     name: "password",
-    placeholder: "password",
+    placeholder: "Enter your password",
     type: "password"
 }, {
     type: "submit",

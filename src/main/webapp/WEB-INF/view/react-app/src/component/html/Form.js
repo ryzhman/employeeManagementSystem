@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Input from './Input';
+import axios from 'axios';
 
 class Form extends Component {
 
@@ -44,20 +45,29 @@ class Form extends Component {
         }
     };
 
+    convertFormToJSON = () => {
+        let resultJSON = {};
+        this.props.inputs.forEach((input, React) => {
+            let inputName = input.name;
+            if (this.refs[inputName]) {
+                resultJSON[inputName] = this.refs[inputName].state.value;
+            }
+        });
+        return resultJSON;
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         if (!this.state.errcount) {
-            const data = new FormData(this.form);
-            fetch(this.form.action, {
-                method: this.form.method,
-                body: new URLSearchParams(data)
+            this.convertFormToJSON();
+            axios.post(this.form.action, this.convertFormToJSON(), {
+                headers: {
+                    'content-type': 'application/json;charset=UTF-8'
+                }
             })
-                //successful response from the server side
-                .then(v => {
-                    //if Spring Security includes the redirect URL in the response, do it on the client
-                    if (v.redirected) {
-                        window.location = v.url;
-                    }
+            //successful response from the server side
+                .then(response => {
+                    console.log(response);
                 })
                 //somwthing went wrong when the request was made
                 .catch(e => console.warn(e))
@@ -68,7 +78,7 @@ class Form extends Component {
         const inputs = this.props.inputs.map(
             ({name, placeholder, type, value, className}, index) => (
                 <Input key={index} name={name} placeholder={placeholder} type={type} value={value}
-                       className={type === 'submit' ? className : ''} handleError={this.handleError}/>
+                       className={type === 'submit' ? className : ''} ref={name} handleError={this.handleError}/>
             )
         );
         const errors = this.renderError();

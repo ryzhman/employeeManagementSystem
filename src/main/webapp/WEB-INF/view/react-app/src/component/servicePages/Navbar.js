@@ -57,7 +57,10 @@ export default class AppNavbar extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu right>
                                     <DropdownItem>
-                                        <NavLink to="/info">Info</NavLink>
+                                        <NavLink to="/login">Login</NavLink>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <NavLink to="/signUp">Create account</NavLink>
                                     </DropdownItem>
                                     <DropdownItem divider/>
                                     <DropdownItem>

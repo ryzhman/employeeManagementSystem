@@ -18,12 +18,12 @@ const inputs = [{
     },
     {
         name: "password",
-        placeholder: "password",
+        placeholder: "Enter your password",
         type: "password"
     },
     {
         name: "password2",
-        placeholder: "password",
+        placeholder: "Repeat your password",
         type: "password"
     },
     {

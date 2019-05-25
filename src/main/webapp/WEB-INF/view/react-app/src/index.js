@@ -6,8 +6,9 @@ import ContactUs from './component/ContactUs';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
 import Logout from "./component/security/Logout";
+import Login from "./component/security/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './component/servicePages/Navbar';
+import AppNavbar from './component/servicePages/Navbar';
 import SignUp from "./component/security/SignUp";
 
 const params = new URLSearchParams(window.location.search)
@@ -15,7 +16,7 @@ const params = new URLSearchParams(window.location.search)
 const router = (
     <Router>
         <div>
-            <Navbar/>
+            <AppNavbar/>
         </div>
 
         <div>

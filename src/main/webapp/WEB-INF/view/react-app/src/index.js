@@ -8,7 +8,7 @@ import EmployeeList from "./component/EmployeeList";
 import Logout from "./component/security/Logout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './component/servicePages/Navbar';
-
+import SignUp from "./component/security/SignUp";
 
 const params = new URLSearchParams(window.location.search)
 
@@ -29,6 +29,7 @@ const router = (
 
                 <Route path="/login" component ={Login}/>
                 <Route path="/logout" component={Logout}/>
+                <Route path="/signUp" component={SignUp}/>
 
                 <Route path="*" render={() => <Redirect to="/home"/>}/>
                 {/*// If the routing path wasn't found, rollback to default one*/}

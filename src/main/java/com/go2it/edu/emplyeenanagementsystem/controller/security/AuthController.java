@@ -1,4 +1,4 @@
-package com.go2it.edu.emplyeenanagementsystem.controller;
+package com.go2it.edu.emplyeenanagementsystem.controller.security;
 
 import java.net.URI;
 import java.util.Collections;

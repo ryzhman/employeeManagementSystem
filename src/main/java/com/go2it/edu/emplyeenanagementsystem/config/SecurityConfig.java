@@ -76,13 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 					.authorizeRequests()
-					//conventional REST API
-					//				even anonymous user is authenthicated
-					//				.authenticated()
-					//				 .hasAnyRole()
 					.antMatchers("/api/employees/**")
 					.hasAnyRole("ADMIN", "USER")
 					.antMatchers("/api/auth/**", "/api/auth")
+					.permitAll()
+					.antMatchers("/", "/home", "/index", "/welcome", "/contact", "/about")
 					.permitAll()
 					//MVC part - React pages
 					.antMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class EmployeeManagementApp extends Component {
+class Home extends Component {
     render() {
         return (
             <h1>Welcome to Employee Management System</h1>
@@ -8,4 +8,4 @@ class EmployeeManagementApp extends Component {
     }
 }
 
-export default EmployeeManagementApp;
+export default Home;

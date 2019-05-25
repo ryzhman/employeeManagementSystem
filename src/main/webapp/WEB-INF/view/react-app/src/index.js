@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import EmployeeManagementApp from './component/EmployeeManagementApp';
+import Home from './component/Home';
+import ContactUs from './component/ContactUs';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
 import Logout from "./component/security/Logout";
@@ -19,13 +20,17 @@ const router = (
 
         <div>
             <Switch>
-                <Route exact path="/" component={EmployeeManagementApp}/>
+                <Route exact path="/(home|index|welcome)" component={Home}/>
+                <Route path="/(contact|about)" component={ContactUs}/>
+
                 <Route exact path="/employees" component={EmployeeList}/>
                 {/*id is this.props in the component*/}
                 <Route exact path="/employees/:id" component={EmployeeList}/>
-                <Route path="/contact" component={EmployeeList}/>
+
+                <Route path="/login" component ={Login}/>
                 <Route path="/logout" component={Logout}/>
-                <Route path="*" render={() => <Redirect to="/"/>}/>
+
+                <Route path="*" render={() => <Redirect to="/home"/>}/>
                 {/*// If the routing path wasn't found, rollback to default one*/}
                 {/*<Route component={NotFound}/>*/}
             </Switch>

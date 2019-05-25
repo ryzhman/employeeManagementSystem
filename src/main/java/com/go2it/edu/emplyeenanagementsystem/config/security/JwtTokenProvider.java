@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,8 +37,11 @@ public class JwtTokenProvider {
 
 		LocalDateTime expTime = LocalDateTime.now().plus(jwtExpirationInMs, ChronoUnit.MILLIS);
 
+		JSONObject subjectJSON = new JSONObject();
+		subjectJSON.put("uid", Long.toString(userPrincipal.getId()));
+		subjectJSON.put("roles", userPrincipal.getAuthorities());
 		return Jwts.builder()
-				.setSubject(Long.toString(userPrincipal.getId()))
+				.setSubject(subjectJSON.toString())
 				.setIssuedAt(Timestamp.valueOf(LocalDateTime.now()))
 				.setExpiration(Timestamp.valueOf(expTime))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)

@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Input from './Input';
-import axios from 'axios';
+import AuthService from '../../service/AuthService';
 
-class Form extends Component {
+class LoginForm extends Component {
 
     constructor(props) {
         super(props);
+        this.authService = AuthService;
+
         if (props.error) {
             this.state = {
                 failure: 'wrong username or password!',
@@ -58,19 +60,12 @@ class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (!this.state.errcount) {
-            this.convertFormToJSON();
-            axios.post(this.form.action, this.convertFormToJSON(), {
-                headers: {
-                    'content-type': 'application/json;charset=UTF-8'
-                }
-            })
-            //successful response from the server side
-                .then(response => {
-                    console.log(response);
-                })
-                //somwthing went wrong when the request was made
-                .catch(e => console.warn(e))
+
+        let result = this.authService.login(this.form.action, this.convertFormToJSON());
+        if (result) {
+            this.props.history.replace('/');
+        } else {
+            console.log("User login failed");
         }
     };
 
@@ -93,7 +88,7 @@ class Form extends Component {
     }
 }
 
-Form.propTypes = {
+LoginForm.propTypes = {
     name: PropTypes.string,
     action: PropTypes.string,
     method: PropTypes.string,
@@ -101,4 +96,4 @@ Form.propTypes = {
     error: PropTypes.string
 };
 
-export default Form;
+export default LoginForm;

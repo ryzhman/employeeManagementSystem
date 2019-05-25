@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../html/Form";
+import Form from "../html/LoginForm";
 
 const inputs = [{
         name: "name",

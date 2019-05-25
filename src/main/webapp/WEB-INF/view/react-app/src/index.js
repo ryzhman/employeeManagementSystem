@@ -6,7 +6,7 @@ import ContactUs from './component/ContactUs';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import EmployeeList from "./component/EmployeeList";
 import Logout from "./component/security/Logout";
-import Login from "./component/security/Login";
+import LoginForm from "./component/security/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './component/servicePages/Navbar';
 import SignUp from "./component/security/SignUp";
@@ -28,7 +28,7 @@ const router = (
                 {/*id is this.props in the component*/}
                 <Route exact path="/employees/:id" component={EmployeeList}/>
 
-                <Route path="/login" component ={Login}/>
+                <Route path="/login" component ={LoginForm}/>
                 <Route path="/logout" component={Logout}/>
                 <Route path="/signUp" component={SignUp}/>
 

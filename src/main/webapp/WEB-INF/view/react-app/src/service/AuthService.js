@@ -3,10 +3,10 @@ import axios from "axios/index";
 
 class AuthService {
 
-    loggedIn() {
+    isAuthenticated() {
         // Checks if there is a saved token and it's still valid
-        const token = this.getToken(); // GEtting token from localstorage
-        return !!token && !this.isTokenExpired(token);// handwaiving here
+        const token = this.getToken();
+        return !!token && !this.isTokenExpired(token);
     }
 
     isTokenExpired(token) {
@@ -39,24 +39,26 @@ class AuthService {
     }
 
     login(url, jsonWithDate) {
-        // return true;
+        //BE is mocked up for testing independently
+        return true;
 
-        axios.post(url, jsonWithDate, {
-            headers: {
-                'content-type': 'application/json;charset=UTF-8'
-            }
-        })
-        //successful response from the server side
-            .then(response => {
-                this.setToken(response.data.accessToken); // Setting the token in localStorage
-                // return Promise.resolve(response);
-                return true;
-            })
-            //something went wrong when the request was made
-            .catch(e => {
-                // console.warn(e);
-                return false;
-            })
+        //Integration testing
+        // axios.post(url, jsonWithDate, {
+        //     headers: {
+        //         'content-type': 'application/json;charset=UTF-8'
+        //     }
+        // })
+        // //successful response from the server side
+        //     .then(response => {
+        //         this.setToken(response.data.accessToken); // Setting the token in localStorage
+        //         // return Promise.resolve(response);
+        //         return true;
+        //     })
+        //     //something went wrong when the request was made
+        //     .catch(e => {
+        //         // console.warn(e);
+        //         return false;
+        //     })
     }
 
     getProfile() {
@@ -73,7 +75,7 @@ class AuthService {
 
         // Setting Authorization header
         // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
-        if (this.loggedIn()) {
+        if (this.isAuthenticated()) {
             headers['Authorization'] = 'Bearer ' + this.getToken()
         }
 

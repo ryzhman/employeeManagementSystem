@@ -10,6 +10,8 @@ import LoginForm from "./component/security/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './component/servicePages/Navbar';
 import SignUp from "./component/security/SignUp";
+import ProtectedRoute from "./component/security/ProtectedRoute";
+import AuthService from "./service/AuthService";
 
 const params = new URLSearchParams(window.location.search)
 
@@ -24,9 +26,8 @@ const router = (
                 <Route exact path="/(home|index|welcome)" component={Home}/>
                 <Route path="/(contact|about)" component={ContactUs}/>
 
-                <Route exact path="/employees" component={EmployeeList}/>
-                {/*id is this.props in the component*/}
-                <Route exact path="/employees/:id" component={EmployeeList}/>
+                <ProtectedRoute authenticated={AuthService.isAuthenticated()} path="/employees/" component={EmployeeList}/>
+                {/*<Route exact path="/employees/:id" component={EmployeeList}/>*/}
 
                 <Route path="/login" component ={LoginForm}/>
                 <Route path="/logout" component={Logout}/>

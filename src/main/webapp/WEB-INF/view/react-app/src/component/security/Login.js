@@ -31,22 +31,9 @@ class Login extends Component{
         this.authService = AuthService;
     }
 
-    // handleLogin = (response, history) => {
-    //     if (response.status === 200) {
-    //         let result = this.authService.handleLogin(response);
-    //         if (result) {
-    //             //redirect to the main page
-    //             history.replace("/");
-    //         }
-    //     } else {
-    //
-    //     }
-    // };
-
     render() {
-        // this.props.handleLogin = this.handleLogin;
         return (
-            <LoginForm {...props} error={params.get('error')}/>
+            <LoginForm {...props}/>
         )
     }
 }

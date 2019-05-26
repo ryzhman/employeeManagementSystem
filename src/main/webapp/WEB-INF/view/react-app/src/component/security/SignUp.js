@@ -1,11 +1,11 @@
-import React, {Component} from "react";
+import React from "react";
 import SignUpForm from "../html/SignUpForm";
 
 const inputs = [{
-        name: "name",
-        placeholder: "Enter your name",
-        type: "text"
-    },
+    name: "name",
+    placeholder: "Enter your name",
+    type: "text"
+},
     {
         name: "username",
         placeholder: "Enter your login id",
@@ -39,18 +39,8 @@ const params = {
     inputs: inputs
 };
 
-class SignUp extends Component {
-    constructor (props) {
-        super(props);
-        this.state = params;
-    }
-
-    render() {
-        params.handleComponentStateChange = this.handleUserSignedUp;
-        return (
-            <SignUpForm {...this.state} props={this.props}/>
-        )
-    }
+function SignUp(props) {
+    return <SignUpForm {...params} {...props}/>
 }
 
 export default SignUp;

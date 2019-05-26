@@ -72,10 +72,10 @@ class SignUpForm extends Component {
 
         this.authService.sendRequest(this.form.action, jsonWithValues, {"method": this.props.method})
             .then(response => {
+                //created code is 201
                 if (response.status >= 200 && response.status < 300) {
                     console.log(response.data.message);
-                    this.props.props.history.push('/');
-                    // this.props.handleComponentStateChange(true);
+                    this.props.history.push('/login');
                 } else {
                     console.warn(response.data.message);
                 }

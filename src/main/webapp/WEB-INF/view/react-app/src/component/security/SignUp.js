@@ -1,5 +1,5 @@
-import React from "react";
-import Form from "../html/LoginForm";
+import React, {Component} from "react";
+import SignUpForm from "../html/SignUpForm";
 
 const inputs = [{
         name: "name",
@@ -32,15 +32,25 @@ const inputs = [{
         className: "btn"
     }];
 
-const props = {
+const params = {
     name: 'signUpForm',
     method: 'POST',
     action: '/api/auth/user',
     inputs: inputs
 };
 
-function SignUp() {
-    return <Form {...props}/>;
+class SignUp extends Component {
+    constructor (props) {
+        super(props);
+        this.state = params;
+    }
+
+    render() {
+        params.handleComponentStateChange = this.handleUserSignedUp;
+        return (
+            <SignUpForm {...this.state} props={this.props}/>
+        )
+    }
 }
 
 export default SignUp;

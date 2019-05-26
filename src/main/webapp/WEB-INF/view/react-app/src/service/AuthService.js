@@ -46,7 +46,7 @@ class AuthService {
                 'content-type': 'application/json;charset=UTF-8'
             }
         })
-            //successful response from the server side
+        //successful response from the server side
             .then(response => {
                 this.setToken(response.data.accessToken); // Setting the token in localStorage
                 // return Promise.resolve(response);
@@ -64,8 +64,7 @@ class AuthService {
         return decode(this.getToken());
     }
 
-
-    fetch(url, options) {
+    sendRequest(url, data, options) {
         // performs api calls sending the required authentication headers
         const headers = {
             'Accept': 'application/json',
@@ -76,14 +75,26 @@ class AuthService {
         // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
         if (this.loggedIn()) {
             headers['Authorization'] = 'Bearer ' + this.getToken()
-        };
+        }
 
-        return fetch(url, {
-            headers,
-            ...options
-        })
-            .then(this._checkStatus)
-            .then(response => response.json())
+        //promise mock up for testing
+        let promise = new Promise((resolve, reject) => {
+                setTimeout(() => resolve({status:200, data : {'message':'Mock response'}}), 300);
+            });
+        promise.then((value) => value);
+        return promise;
+
+        //real-world BE call - to be used for integration testing
+        // return axios({
+        //     url: url,
+        //     method: options.method,
+        //     data: data
+        // }, {
+        //     headers,
+        //     ...options
+        // })
+        //     .then(this._checkStatus)
+        //     .then(response => response);
     }
 
     _checkStatus(response) {
@@ -91,7 +102,7 @@ class AuthService {
         if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
             return response
         } else {
-            var error = new Error(response.statusText);
+            let error = new Error(response.statusText);
             error.response = response;
             throw error
         }

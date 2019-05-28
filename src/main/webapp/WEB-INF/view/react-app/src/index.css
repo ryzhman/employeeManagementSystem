@@ -64,9 +64,6 @@ body {
   padding: 2rem;
   font-family: sans-serif;
 }
-.active{
-  color:red;
-}
 
 .container, .container-fluid {
   margin-top: 20px;
@@ -80,4 +77,17 @@ body {
   padding: 7px 14px;
   height: 60px;
   width: 180px;
+}
+
+.navbar-nav>li, .navbar-nav>dropdown-toggle, .navbar-nav>nav-link {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: compact;
+}
+
+.links, .nav-item>.nav-link, .dropdown-toggle>.nav-link {
+  padding: 0;
+  color: #007bff;
+  font-family: "Open Sans", "Roboto", arial, sans-serif;
+  text-align: right;
 }

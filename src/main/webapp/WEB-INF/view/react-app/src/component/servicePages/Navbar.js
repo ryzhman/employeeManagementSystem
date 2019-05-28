@@ -9,7 +9,6 @@ import {
     NavbarBrand,
     NavbarToggler,
     NavItem,
-    // NavLink,
     UncontrolledDropdown
 } from 'reactstrap';
 import {NavLink} from 'react-router-dom';
@@ -29,27 +28,31 @@ export default class AppNavbar extends Component {
 
     render() {
         return (
-            <Navbar color="light" light  expand="md" sticky={'top'}
+            <Navbar color="light" light expand="md" sticky={'top'}
                     className="shadow-sm py-0 border-dark border-bottom">
                 <div>
-                    <NavbarBrand to="/"><img
-                        src={"https://res.cloudinary.com/go2it/image/upload/v1557970687/Go2IT_small.png"}/></NavbarBrand>
-                    <NavbarToggler onClick={this.toggle}/>
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
+                            <NavbarBrand to="/"><img
+                                src={"https://res.cloudinary.com/go2it/image/upload/v1557970687/Go2IT_small.png"}/></NavbarBrand>
+                            <NavbarToggler onClick={this.toggle}/>
+                        </Nav>
+                        <Nav className="ml-auto links" navbar>
                             <NavItem>
                                 <NavLink to="/employees" activeClassName="active">View all employees</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to="/contact"  activeClassName="active">Contact us</NavLink>
+                                <NavLink to="/contact" activeClassName="active">Contact us</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink
-                                    href="https://www.facebook.com/Go2IT.ca" activeClassName="active">@Facebook</NavLink>
+                                    href="https://www.facebook.com/Go2IT.ca"
+                                    activeClassName="active">@Facebook</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink
-                                    href="https://github.com/ryzhman/employeeManagementSystem" activeClassName="active">GitHub</NavLink>
+                                    href="https://github.com/ryzhman/employeeManagementSystem"
+                                    activeClassName="active">GitHub</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>

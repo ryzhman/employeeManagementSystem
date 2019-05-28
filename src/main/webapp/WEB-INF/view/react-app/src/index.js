@@ -35,7 +35,7 @@ const router = (
 
                 <Route path="*" render={() => <Redirect to="/home"/>}/>
                 {/*// If the routing path wasn't found, rollback to default one*/}
-                {/*<Route component={NotFound}/>*/}
+                <Route component={Home}/>
             </Switch>
         </div>
     </Router>

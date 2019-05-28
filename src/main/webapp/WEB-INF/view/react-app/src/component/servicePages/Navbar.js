@@ -12,6 +12,7 @@ import {
     UncontrolledDropdown
 } from 'reactstrap';
 import {NavLink} from 'react-router-dom';
+import AuthService from '../../service/AuthService';
 
 export default class AppNavbar extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ export default class AppNavbar extends Component {
                         </Nav>
                         <Nav className="ml-auto links" navbar>
                             <NavItem>
-                                <NavLink to="/employees" activeClassName="active">View all employees</NavLink>
+                                <NavLink to="/employees" activeClassName="active" className={AuthService.isAuthenticated() ? '' : 'hidden'}>View all employees</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink to="/contact" activeClassName="active">Contact us</NavLink>

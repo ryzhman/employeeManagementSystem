@@ -68,7 +68,7 @@ export default class AppNavbar extends Component {
                                     </DropdownItem>
                                     <DropdownItem divider/>
                                     <DropdownItem>
-                                        <NavLink href="/logout">Logout</NavLink>
+                                        <NavLink to="/logout">Logout</NavLink>
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

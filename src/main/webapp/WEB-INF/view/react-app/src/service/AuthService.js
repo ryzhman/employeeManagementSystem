@@ -80,23 +80,23 @@ class AuthService {
         }
 
         //promise mock up for testing
-        let promise = new Promise((resolve, reject) => {
-                setTimeout(() => resolve({status:200, data : {'message':'Mock response'}}), 300);
-            });
-        promise.then((value) => value);
-        return promise;
+        // let promise = new Promise((resolve, reject) => {
+        //         setTimeout(() => resolve({status:200, data : {'message':'Mock response'}}), 300);
+        //     });
+        // promise.then((value) => value);
+        // return promise;
 
         //real-world BE call - to be used for integration testing
-        // return axios({
-        //     url: url,
-        //     method: options.method,
-        //     data: data
-        // }, {
-        //     headers,
-        //     ...options
-        // })
-        //     .then(this._checkStatus)
-        //     .then(response => response);
+        return axios({
+            url: url,
+            method: options.method,
+            data: data
+        }, {
+            headers,
+            ...options
+        })
+            .then(this._checkStatus)
+            .then(response => response);
     }
 
     _checkStatus(response) {

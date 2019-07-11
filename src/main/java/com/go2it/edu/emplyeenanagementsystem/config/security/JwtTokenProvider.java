@@ -3,8 +3,11 @@ package com.go2it.edu.emplyeenanagementsystem.config.security;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.stream.Collectors;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +42,13 @@ public class JwtTokenProvider {
 
 		JSONObject subjectJSON = new JSONObject();
 		subjectJSON.put("uid", Long.toString(userPrincipal.getId()));
-		subjectJSON.put("roles", userPrincipal.getAuthorities());
+
+		JSONObject roles = new JSONObject();
+		roles.put("roles", userPrincipal.getAuthorities()
+				.stream()
+				.map(role -> role.getAuthority())
+				.collect(Collectors.joining(",")));
+		subjectJSON.put("roles", roles.toString());
 		return Jwts.builder()
 				.setSubject(subjectJSON.toString())
 				.setIssuedAt(Timestamp.valueOf(LocalDateTime.now()))
@@ -48,10 +57,11 @@ public class JwtTokenProvider {
 				.compact();
 	}
 
-	public Long getUserIdFromJWT(String token) {
+	public Long getUserIdFromJWT(String token) throws ParseException {
 		Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-
-		return Long.parseLong(claims.getSubject());
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jwtJSON = (JSONObject) jsonParser.parse(claims.getSubject());
+		return Long.parseLong((String) jwtJSON.get("uid"));
 	}
 
 	public boolean validateToken(String authToken) {
